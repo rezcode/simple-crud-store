@@ -7,6 +7,19 @@
   cursor: pointer;
 }
 
+.linkDisable {
+  font-weight: bold;
+  color: #fff;
+}
+
+.linkDisable:hover {
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
 .authBtn {
   font-weight: bold;
   color: #fff;
