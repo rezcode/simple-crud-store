@@ -1,0 +1,22 @@
+.cardProduct img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.cardProduct span {
+  font-size: smaller;
+}
+
+.cardProduct {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.cardProduct:hover {
+  transform: scale(1.05);
+}
+
+.stockBadge {
+  font-size: 10px !important;
+}

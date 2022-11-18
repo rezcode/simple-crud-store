@@ -1,0 +1,14 @@
+.header span {
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.header svg {
+  cursor: pointer;
+}
+
+.cardLeft img {
+  border-radius: 6px;
+  height: 540px;
+  object-fit: cover;
+}
