@@ -29,47 +29,52 @@ const Detail = () => {
       {isLoading ? (
         <LoadingData />
       ) : (
-        <>
-          <div className="row my-4">
-            <div className="col-md-4">
-              <div className={`card ${style.cardLeft}`}>
-                <div className="card-body">
-                  <img src={data[0]?.img} className="card-img-top" alt="..." />
-                </div>
+        <div className="row my-4">
+          <div className="col-md-4">
+            <div className={`card ${style.cardLeft}`}>
+              <div className="card-body">
+                {data?.map((item) => (
+                  <img
+                    src={item.img}
+                    className="card-img-top"
+                    alt="..."
+                    key={item.id}
+                  />
+                ))}
               </div>
             </div>
-            <div className="col-md-8">
-              <div className={`card ${style.cardRight}`}>
-                <div className="card-body">
-                  <table className="table table-hover">
-                    <thead>
-                      <tr>
-                        <th scope="col">Product Name</th>
-                        <th scope="col">Purchase Price</th>
-                        <th scope="col">Sell Price</th>
-                        <th scope="col">Stock</th>
+          </div>
+          <div className="col-md-8">
+            <div className={`card ${style.cardRight}`}>
+              <div className="card-body">
+                <table className="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">Product Name</th>
+                      <th scope="col">Purchase Price</th>
+                      <th scope="col">Sell Price</th>
+                      <th scope="col">Stock</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data?.map((item) => (
+                      <tr key={item.id}>
+                        <td>{item.name}</td>
+                        <td>Rp. {item.purchase_price}</td>
+                        <td>Rp. {item.sell_price}</td>
+                        <td>{item.stock} pcs</td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {data?.map((item) => (
-                        <tr key={item.id}>
-                          <td>{item.name}</td>
-                          <td>Rp. {item.purchase_price}</td>
-                          <td>Rp. {item.sell_price}</td>
-                          <td>{item.stock} pcs</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                  <div className="d-flex text-end gap-3 justify-content-end">
-                    <ModalDeleteProduct />
-                    <ModalEditProduct />
-                  </div>
+                    ))}
+                  </tbody>
+                </table>
+                <div className="d-flex text-end gap-3 justify-content-end">
+                  <ModalDeleteProduct />
+                  <ModalEditProduct />
                 </div>
               </div>
             </div>
           </div>
-        </>
+        </div>
       )}
     </>
   );
