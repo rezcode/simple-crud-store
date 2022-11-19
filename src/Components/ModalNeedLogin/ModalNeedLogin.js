@@ -1,25 +1,33 @@
 import React, { useState } from "react";
-import { RiAlertLine } from "react-icons/ri";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { useNavigate } from "react-router-dom";
 
-function ModalDeleteProduct() {
+function ModalNeedLogin(props) {
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  console.log(props);
+
   return (
     <>
-      <Button variant="danger" className="rounded-pill" onClick={handleShow}>
-        Delete product
+      <Button
+        variant={props.color}
+        className="rounded-pill"
+        onClick={handleShow}
+      >
+        {props.text}
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Body>
           <div className="row text-center">
-            <RiAlertLine size={100} color="#d63384" className="my-3" />
-            <p>Are you sure to delete this product?</p>
+            <AiOutlineInfoCircle size={100} color="#7432f9" className="my-3" />
+            <p>You need to login first!</p>
           </div>
           <div className="d-flex gap-3 justify-content-center my-3">
             <button
@@ -28,8 +36,11 @@ function ModalDeleteProduct() {
             >
               Cancel
             </button>
-            <button className="btn btn-danger rounded-pill">
-              Yes delete it
+            <button
+              className="btn btn-primary rounded-pill"
+              onClick={() => navigate("/login")}
+            >
+              Login
             </button>
           </div>
         </Modal.Body>
@@ -38,4 +49,4 @@ function ModalDeleteProduct() {
   );
 }
 
-export default ModalDeleteProduct;
+export default ModalNeedLogin;

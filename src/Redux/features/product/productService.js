@@ -16,13 +16,15 @@ const getProductDetail = async (id) => {
 
 const addNewProduct = async (dataProduct) => {
   console.log("data product", dataProduct);
-  const response = await axios.post(
+  await axios.post(
     `${process.env.REACT_APP_API_URL}/product/add`,
     dataProduct.formData,
     dataProduct.config
   );
 
-  return response.data;
+  const checkAllProduct = await getAllProduct();
+
+  return checkAllProduct;
 };
 
 const productService = {

@@ -7,6 +7,7 @@ import ModalDeleteProduct from "../../Components/ModalDeleteProduct/ModalDeleteP
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetail } from "../../Redux/features/product/productSlice";
 import LoadingData from "../../Components/LoadingData/LoadingData";
+import ModalNeedLogin from "../../Components/ModalNeedLogin/ModalNeedLogin";
 
 const Detail = () => {
   const { data, isLoading } = useSelector((state) => state.product);
@@ -17,6 +18,8 @@ const Detail = () => {
   useEffect(() => {
     dispatch(getProductDetail(id));
   }, [dispatch, id]);
+
+  const token = localStorage.getItem("userToken");
 
   return (
     <>
@@ -68,8 +71,16 @@ const Detail = () => {
                   </tbody>
                 </table>
                 <div className="d-flex text-end gap-3 justify-content-end">
-                  <ModalDeleteProduct />
-                  <ModalEditProduct />
+                  {!token ? (
+                    <ModalNeedLogin text="Delete Product" color="danger" />
+                  ) : (
+                    <ModalDeleteProduct />
+                  )}
+                  {!token ? (
+                    <ModalNeedLogin text="Edit Data" color="primary" />
+                  ) : (
+                    <ModalEditProduct />
+                  )}
                 </div>
               </div>
             </div>

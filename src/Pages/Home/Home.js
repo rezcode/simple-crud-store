@@ -5,6 +5,7 @@ import style from "./Home.module.css";
 import LoadingData from "../../Components/LoadingData/LoadingData";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProduct } from "../../Redux/features/product/productSlice";
+import ModalNeedLogin from "../../Components/ModalNeedLogin/ModalNeedLogin";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,8 @@ const Home = () => {
   useEffect(() => {
     dispatch(getAllProduct());
   }, [dispatch]);
+
+  const token = localStorage.getItem("userToken");
 
   return (
     <>
@@ -25,7 +28,11 @@ const Home = () => {
           />
         </div>
         <div>
-          <ModalAddProduct />
+          {!token ? (
+            <ModalNeedLogin text="Add New Product" color="primary" />
+          ) : (
+            <ModalAddProduct />
+          )}
         </div>
       </div>
       <hr />

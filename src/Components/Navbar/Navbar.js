@@ -21,7 +21,7 @@ const Navibar = () => {
       text: "You have successfully logged out!",
       icon: "success",
     });
-    navigate("/");
+    navigate("/login");
   };
 
   return (
