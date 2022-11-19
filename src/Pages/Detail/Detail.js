@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import style from "./Detail.module.css";
 import { MdArrowBackIos } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
-import { BsFillImageFill } from "react-icons/bs";
 import ModalEditProduct from "../../Components/ModalEditProduct/ModalEditProduct";
 import ModalDeleteProduct from "../../Components/ModalDeleteProduct/ModalDeleteProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetail } from "../../Redux/features/product/productSlice";
 import LoadingData from "../../Components/LoadingData/LoadingData";
 import ModalNeedLogin from "../../Components/ModalNeedLogin/ModalNeedLogin";
+import ModalUpdateProductImg from "../../Components/ModalUpdateProductImg/ModalUpdateProductImg";
 
 const Detail = () => {
   const { data, isLoading } = useSelector((state) => state.product);
@@ -18,7 +18,7 @@ const Detail = () => {
 
   useEffect(() => {
     dispatch(getProductDetail(id));
-  }, [dispatch, id]);
+  }, [dispatch, navigate, id]);
 
   const token = localStorage.getItem("userToken");
 
@@ -35,18 +35,6 @@ const Detail = () => {
       ) : (
         <div className="row my-4">
           <div className="col-md-4">
-            {/* <div className={`card ${style.cardLeft}`}>
-              <div className="card-body">
-                {data?.map((item) => (
-                  <img
-                    src={item.img}
-                    className="card-img-top"
-                    alt="..."
-                    key={item.id}
-                  />
-                ))}
-              </div>
-            </div> */}
             <div className={style.container}>
               {data?.map((item) => (
                 <div key={item.id}>
@@ -57,18 +45,7 @@ const Detail = () => {
                     style={{ width: "100%" }}
                   />
 
-                  <label
-                    for="inputFile"
-                    className={`btn btn-primary rounded-circle ${style.middle}`}
-                  >
-                    <BsFillImageFill size={20} className="mb-2" /> Change image
-                  </label>
-                  <input
-                    type="file"
-                    id="inputFile"
-                    name="inputFile"
-                    style={{ display: "none" }}
-                  ></input>
+                  <ModalUpdateProductImg />
                 </div>
               ))}
             </div>
@@ -105,7 +82,7 @@ const Detail = () => {
                   {!token ? (
                     <ModalNeedLogin text="Edit Data" color="primary" />
                   ) : (
-                    <ModalEditProduct />
+                    <ModalEditProduct data={data} />
                   )}
                 </div>
               </div>

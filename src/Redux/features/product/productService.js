@@ -35,11 +35,36 @@ const deleteProduct = async (data) => {
   return response.data;
 };
 
+const editProduct = async (data) => {
+  console.log(data.body, data.id, data.config);
+  const response = await axios.patch(
+    `${process.env.REACT_APP_API_URL}/product/${data.id}`,
+    data.body,
+    data.config
+  );
+
+  return response.data;
+};
+
+const editImgProduct = async (data) => {
+  console.log(data.formData, data.id, data.config);
+  const response = await axios.patch(
+    `${process.env.REACT_APP_API_URL}/product/image/${data.id}`,
+    data.formData,
+    data.config
+  );
+
+  console.log(response);
+  return response.data;
+};
+
 const productService = {
   getAllProduct,
   getProductDetail,
   addNewProduct,
   deleteProduct,
+  editProduct,
+  editImgProduct,
 };
 
 export default productService;

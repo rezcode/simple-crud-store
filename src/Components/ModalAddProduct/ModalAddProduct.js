@@ -94,6 +94,7 @@ function ModalAddProduct() {
                 type="file"
                 className="form-control rounded-pill"
                 onChange={handleImage}
+                accept="image/png, image/gif, image/jpeg"
                 required
               />
               <small className="text-danger" style={{ fontSize: "12px" }}>

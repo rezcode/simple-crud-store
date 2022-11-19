@@ -5,6 +5,7 @@ const initialState = {
   data: null,
   isLoading: false,
   isError: false,
+  isSuccess: false,
   message: "",
 };
 
@@ -64,6 +65,33 @@ export const deleteProduct = createAsyncThunk(
   }
 );
 
+export const editProduct = createAsyncThunk(
+  "product/editProduct",
+  async (data, thunkAPI) => {
+    try {
+      const response = await productService.editProduct(data);
+      return response;
+    } catch (error) {
+      const message = error.response.data.message || error.response.data;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const editImgProduct = createAsyncThunk(
+  "product/editImgProduct",
+  async (data, thunkAPI) => {
+    try {
+      const response = await productService.editImgProduct(data);
+      return response;
+    } catch (error) {
+      console.log(error);
+      const message = error.response.data.message || error.response.data;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const productSlice = createSlice({
   name: "product",
   initialState,
@@ -72,6 +100,7 @@ export const productSlice = createSlice({
       state.isLoading = false;
       state.isError = false;
       state.message = "";
+      state.isSuccess = false;
     },
   },
   extraReducers: (builder) => {
@@ -116,6 +145,31 @@ export const productSlice = createSlice({
       })
       .addCase(deleteProduct.rejected, (state) => {
         state.isLoading = false;
+      })
+      .addCase(editProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(editProduct.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.data = action.payload.data;
+      })
+      .addCase(editProduct.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(editImgProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(editImgProduct.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.data = action.payload.data;
+      })
+      .addCase(editImgProduct.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       });
   },
 });
