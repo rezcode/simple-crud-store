@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import style from "./Detail.module.css";
 import { MdArrowBackIos } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
+import { BsFillImageFill } from "react-icons/bs";
 import ModalEditProduct from "../../Components/ModalEditProduct/ModalEditProduct";
 import ModalDeleteProduct from "../../Components/ModalDeleteProduct/ModalDeleteProduct";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,7 +35,7 @@ const Detail = () => {
       ) : (
         <div className="row my-4">
           <div className="col-md-4">
-            <div className={`card ${style.cardLeft}`}>
+            {/* <div className={`card ${style.cardLeft}`}>
               <div className="card-body">
                 {data?.map((item) => (
                   <img
@@ -45,6 +46,31 @@ const Detail = () => {
                   />
                 ))}
               </div>
+            </div> */}
+            <div className={style.container}>
+              {data?.map((item) => (
+                <div key={item.id}>
+                  <img
+                    src={item.img}
+                    alt="Avatar"
+                    className={style.image}
+                    style={{ width: "100%" }}
+                  />
+
+                  <label
+                    for="inputFile"
+                    className={`btn btn-primary rounded-circle ${style.middle}`}
+                  >
+                    <BsFillImageFill size={20} className="mb-2" /> Change image
+                  </label>
+                  <input
+                    type="file"
+                    id="inputFile"
+                    name="inputFile"
+                    style={{ display: "none" }}
+                  ></input>
+                </div>
+              ))}
             </div>
           </div>
           <div className="col-md-8">

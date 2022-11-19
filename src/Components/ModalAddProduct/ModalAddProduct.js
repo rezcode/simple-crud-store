@@ -107,7 +107,6 @@ function ModalAddProduct() {
                   <input
                     type="number"
                     className="form-control rounded-pill"
-                    placeholder="0"
                     onChange={(e) => setPurchasePrice(e.target.value)}
                     min="0"
                     onKeyPress={(event) => {
@@ -123,7 +122,7 @@ function ModalAddProduct() {
                   <input
                     type="number"
                     className="form-control rounded-pill"
-                    placeholder="0"
+                    min="0"
                     onChange={(e) => setSellPrice(e.target.value)}
                     onKeyPress={(event) => {
                       if (event.charCode < 48) {
@@ -138,7 +137,7 @@ function ModalAddProduct() {
                   <input
                     type="number"
                     className="form-control rounded-pill"
-                    placeholder="0"
+                    min="0"
                     onChange={(e) => setstock(e.target.value)}
                     onKeyPress={(event) => {
                       if (event.charCode < 48) {

@@ -15,7 +15,6 @@ const getProductDetail = async (id) => {
 };
 
 const addNewProduct = async (dataProduct) => {
-  console.log("data product", dataProduct);
   await axios.post(
     `${process.env.REACT_APP_API_URL}/product/add`,
     dataProduct.formData,
@@ -27,10 +26,20 @@ const addNewProduct = async (dataProduct) => {
   return checkAllProduct;
 };
 
+const deleteProduct = async (data) => {
+  const response = await axios.delete(
+    `${process.env.REACT_APP_API_URL}/product/${data.id}`,
+    data.config
+  );
+
+  return response.data;
+};
+
 const productService = {
   getAllProduct,
   getProductDetail,
   addNewProduct,
+  deleteProduct,
 };
 
 export default productService;
