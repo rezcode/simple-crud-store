@@ -34,7 +34,7 @@ const deleteProduct = async (data) => {
 
   const checkAllProduct = await getAllProduct();
 
-  return checkAllProduct.data;
+  return checkAllProduct;
 };
 
 const editProduct = async (data) => {
