@@ -81,9 +81,12 @@ function ModalUpdateProductImg(props) {
         <form onSubmit={handleSubmit}>
           <Modal.Body>
             <div className="mb-3">
-              <label className="form-label">Product Image :</label>
+              <label htmlFor="imgs" className="form-label">
+                Product Image :
+              </label>
               <input
                 type="file"
+                id="imgs"
                 className="form-control rounded-pill"
                 onChange={handleImage}
                 required
