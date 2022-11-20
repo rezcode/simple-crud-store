@@ -27,12 +27,14 @@ const addNewProduct = async (dataProduct) => {
 };
 
 const deleteProduct = async (data) => {
-  const response = await axios.delete(
+  await axios.delete(
     `${process.env.REACT_APP_API_URL}/product/${data.id}`,
     data.config
   );
 
-  return response.data;
+  const checkAllProduct = await getAllProduct();
+
+  return checkAllProduct.data;
 };
 
 const editProduct = async (data) => {
