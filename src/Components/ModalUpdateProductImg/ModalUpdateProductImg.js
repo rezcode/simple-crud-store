@@ -81,16 +81,13 @@ function ModalUpdateProductImg(props) {
         <form onSubmit={handleSubmit}>
           <Modal.Body>
             <div className="mb-3">
-              <label htmlFor="imgs" className="form-label">
-                Product Image :
-              </label>
+              <label className="form-label">Product Image :</label>
               <input
                 type="file"
-                id="imgs"
                 className="form-control rounded-pill"
                 onChange={handleImage}
-                required
                 accept="image/png, image/jpg"
+                required
               />
               <small className="text-danger" style={{ fontSize: "12px" }}>
                 Format file must be .jpg, .png only and max size 100 kb
