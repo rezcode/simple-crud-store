@@ -143,8 +143,9 @@ export const productSlice = createSlice({
       .addCase(deleteProduct.fulfilled, (state, action) => {
         state.isLoading = false;
       })
-      .addCase(deleteProduct.rejected, (state) => {
+      .addCase(deleteProduct.rejected, (state, action) => {
         state.isLoading = false;
+        state.data = action.payload.data;
       })
       .addCase(editProduct.pending, (state) => {
         state.isLoading = true;
