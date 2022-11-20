@@ -9,6 +9,8 @@ import { getProductDetail } from "../../Redux/features/product/productSlice";
 import LoadingData from "../../Components/LoadingData/LoadingData";
 import ModalNeedLogin from "../../Components/ModalNeedLogin/ModalNeedLogin";
 import ModalUpdateProductImg from "../../Components/ModalUpdateProductImg/ModalUpdateProductImg";
+import Swal from "sweetalert2";
+import { BsFillImageFill } from "react-icons/bs";
 
 const Detail = () => {
   const { data, isLoading } = useSelector((state) => state.product);
@@ -21,6 +23,12 @@ const Detail = () => {
   }, [dispatch, navigate, id]);
 
   const token = localStorage.getItem("userToken");
+  const needLogin = () => {
+    Swal.fire({
+      text: "You need login first",
+      icon: "info",
+    }).then((result) => result.isConfirmed && navigate("/login"));
+  };
 
   return (
     <>
@@ -44,8 +52,20 @@ const Detail = () => {
                     className={style.image}
                     style={{ width: "100%" }}
                   />
-
-                  <ModalUpdateProductImg />
+                  {!token ? (
+                    // <button onClick={needLogin} className="btn btn-primary">
+                    //   Change img
+                    // </button>
+                    <label
+                      onClick={needLogin}
+                      className={`btn btn-light rounded-circle ${style.middle}`}
+                    >
+                      <BsFillImageFill size={20} className="mb-2" /> Change
+                      image
+                    </label>
+                  ) : (
+                    <ModalUpdateProductImg />
+                  )}
                 </div>
               ))}
             </div>
